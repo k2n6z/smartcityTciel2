@@ -568,12 +568,13 @@ document.addEventListener("keydown", function(event) {
 
 </script>
 <script>
-document.querySelector(".modal-content form").addEventListener("submit", function(event) {
+<script>
+document.querySelector(".modal-content form").addEventListener("submit", async function(event) {
     event.preventDefault();
 
     const nom = this.querySelector('input[type="text"]').value;
     const photo = this.querySelector('input[type="file"][accept="image/*"]').files[0];
-const documentProjet = this.querySelector('input[type="file"][accept=".pdf,.ppt,.pptx,.doc,.docx"]').files[0];
+    const documentProjet = this.querySelector('input[type="file"][accept=".pdf,.ppt,.pptx,.doc,.docx"]').files[0];
     const categorie = this.querySelector("select").value;
     const description = this.querySelector("textarea").value;
 
@@ -582,42 +583,154 @@ const documentProjet = this.querySelector('input[type="file"][accept=".pdf,.ppt,
         return;
     }
 
-    const projets = document.querySelector(".project-cards");
+    try {
+        let photoUrl = "";
+        let documentUrl = "";
 
-    const nouveauProjet = document.createElement("article");
-    nouveauProjet.className = "project-card";
+        // ENVOI DE LA PHOTO
+        if (photo) {
+            const nomPhoto = Date.now() + "_" + photo.name;
 
-  nouveauProjet.innerHTML = `
-    ${photo ? `<img src="${URL.createObjectURL(photo)}" alt="${nom}">` : ""}
+            const { error: photoError } = await supabaseClient
+                .storage
+                .from("projets")
+                .upload(nomPhoto, photo);
 
-    <div class="project-card-content">
-        <p class="project-category">${categorie}</p>
+            if (photoError) throw photoError;
 
-        <h3>${nom}</h3>
+            const { data: photoData } = supabaseClient
+                .storage
+                .from("projets")
+                .getPublicUrl(nomPhoto);
 
-        <p>${description}</p>
+            photoUrl = photoData.publicUrl;
+        }
 
-        ${documentProjet ? `
-            <a href="${URL.createObjectURL(documentProjet)}"
-               target="_blank"
-               class="button">
-                📄 Voir le document
-            </a>
-        ` : ""}
+        // ENVOI DU DOCUMENT
+        if (documentProjet) {
+            const nomDocument = Date.now() + "_" + documentProjet.name;
 
-        <button class="delete-project"
-                onclick="this.closest('.project-card').remove()">
-            🗑️ Supprimer
-        </button>
-    </div>
-`;
-    projets.appendChild(nouveauProjet);
+            const { error: documentError } = await supabaseClient
+                .storage
+                .from("projets")
+                .upload(nomDocument, documentProjet);
 
-    this.reset();
-    fermerFormulaire();
+            if (documentError) throw documentError;
 
-    alert("Projet ajouté avec succès !");
+            const { data: documentData } = supabaseClient
+                .storage
+                .from("projets")
+                .getPublicUrl(nomDocument);
+
+            documentUrl = documentData.publicUrl;
+        }
+
+        // ENREGISTREMENT DU PROJET
+        const { error } = await supabaseClient
+            .from("projets")
+            .insert({
+                nom: nom,
+                categorie: categorie,
+                description: description,
+                photo_url: photoUrl,
+                document_url: documentUrl
+            });
+
+        if (error) throw error;
+
+        alert("Projet ajouté avec succès !");
+
+        this.reset();
+        fermerFormulaire();
+
+        // Recharge les projets
+        chargerProjets();
+
+    } catch (error) {
+        console.error(error);
+        alert("Erreur lors de l'ajout du projet : " + error.message);
+    }
 });
+    <script>
+async function chargerProjets() {
+
+    const { data: projets, error } = await supabaseClient
+        .from("projets")
+        .select("*")
+        .order("id", { ascending: false });
+
+    if (error) {
+        console.error("Erreur :", error);
+        return;
+    }
+
+    const conteneur = document.querySelector(".project-cards");
+
+    projets.forEach(function(projet) {
+
+        const nouveauProjet = document.createElement("article");
+        nouveauProjet.className = "project-card";
+
+        nouveauProjet.innerHTML = `
+            ${projet.photo_url ? `
+                <img src="${projet.photo_url}" alt="${projet.nom}">
+            ` : ""}
+
+            <div class="project-card-content">
+
+                <p class="project-category">
+                    ${projet.categorie}
+                </p>
+
+                <h3>${projet.nom}</h3>
+
+                <p>${projet.description}</p>
+
+                ${projet.document_url ? `
+                    <a href="${projet.document_url}"
+                       target="_blank"
+                       class="button">
+                        📄 Voir le document
+                    </a>
+                ` : ""}
+
+                <button class="delete-project"
+                        onclick="supprimerProjet(${projet.id}, this)">
+                    🗑️ Supprimer
+                </button>
+
+            </div>
+        `;
+
+        conteneur.appendChild(nouveauProjet);
+    });
+}
+
+async function supprimerProjet(id, bouton) {
+
+    const confirmation = confirm("Voulez-vous vraiment supprimer ce projet ?");
+
+    if (!confirmation) {
+        return;
+    }
+
+    const { error } = await supabaseClient
+        .from("projets")
+        .delete()
+        .eq("id", id);
+
+    if (error) {
+        alert("Erreur lors de la suppression.");
+        console.error(error);
+        return;
+    }
+
+    bouton.closest(".project-card").remove();
+
+    alert("Projet supprimé.");
+}
+
+chargerProjets();
 </script>
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
