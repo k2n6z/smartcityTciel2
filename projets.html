@@ -1,5 +1,7 @@
+```html
 <!DOCTYPE html>
 <html lang="fr">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -20,9 +22,8 @@
     <script>
         const SUPABASE_URL = "https://uxwbkrkmpqxkzqsxhfih.supabase.co";
 
-        // IMPORTANT :
-        // Remplace uniquement cette valeur par TA clé Publishable.
-        const SUPABASE_KEY = "sb_publishable_zQ6z5dvxgDrhdXzAwnxKDg_waO7fLyy";
+        /* Garde ici ta vraie clé Publishable */
+        const SUPABASE_KEY = "TA_VRAIE_CLE_PUBLISHABLE";
 
         const supabaseClient = supabase.createClient(
             SUPABASE_URL,
@@ -37,9 +38,9 @@
          NAVIGATION
     ========================== -->
 
-    <header class="navbar">
+    <header>
 
-        <div class="container nav-container">
+        <div class="navbar">
 
             <a href="index.html" class="logo">
                 Smart<span>City</span>
@@ -87,12 +88,12 @@
 
 
     <!-- =========================
-         HERO
+         HERO PROJETS
     ========================== -->
 
     <section class="hero">
 
-        <div class="container">
+        <div class="hero-content">
 
             <p class="small-title">
                 NOS PROJETS
@@ -103,7 +104,7 @@
                 <span>la ville de demain.</span>
             </h1>
 
-            <p class="hero-text">
+            <p>
                 Découvrez les projets SmartCity et les solutions
                 imaginées pour améliorer la vie en ville.
             </p>
@@ -114,108 +115,112 @@
 
 
     <!-- =========================
-         PROJETS
+         SECTION PROJETS
     ========================== -->
 
-    <section class="section">
+    <section class="section" id="projets">
 
-        <div class="container">
+        <div class="section-header">
 
-            <div class="section-header">
+            <div>
 
-                <div>
-                    <p class="small-title">
-                        PROJETS SMARTCITY
-                    </p>
+                <p class="small-title">
+                    PROJETS SMARTCITY
+                </p>
 
-                    <h2>
-                        Nos projets
-                    </h2>
+                <h2>
+                    Nos projets
+                </h2>
 
-                    <p>
-                        Découvrez les différentes idées et solutions
-                        proposées pour rendre les villes plus intelligentes.
-                    </p>
-                </div>
-
-                <button
-                    class="add-project"
-                    onclick="ouvrirFormulaire()"
-                >
-                    <span class="plus">+</span>
-                    Ajouter un projet
-                </button>
+                <p>
+                    Découvrez les différentes idées et solutions
+                    proposées pour rendre les villes plus intelligentes.
+                </p>
 
             </div>
 
-
-            <!-- PROJETS EXISTANTS -->
-
-            <div class="project-cards">
-
-                <!-- Projet exemple 1 -->
-
-                <article class="project-card">
-
-                    <div class="project-card-content">
-
-                        <p class="project-category">
-                            MOBILITÉ
-                        </p>
-
-                        <h3>
-                            Parking intelligent
-                        </h3>
-
-                        <p>
-                            Un système permettant aux automobilistes
-                            de connaître les places de stationnement
-                            disponibles en temps réel.
-                        </p>
-
-                    </div>
-
-                </article>
-
-
-                <!-- Projet exemple 2 -->
-
-                <article class="project-card">
-
-                    <div class="project-card-content">
-
-                        <p class="project-category">
-                            ENVIRONNEMENT
-                        </p>
-
-                        <h3>
-                            Gestion intelligente des déchets
-                        </h3>
-
-                        <p>
-                            Des poubelles connectées permettant
-                            d'optimiser les tournées de collecte
-                            et de réduire les déplacements inutiles.
-                        </p>
-
-                    </div>
-
-                </article>
-
-
-                <!-- Les projets Supabase seront ajoutés ici -->
-
-                <div id="projets-dynamiques"></div>
-
-            </div>
+            <button
+                class="add-project"
+                type="button"
+                onclick="ouvrirFormulaire()"
+            >
+                <span class="plus">+</span>
+                Ajouter un projet
+            </button>
 
         </div>
+
+
+        <!-- =========================
+             PROJETS
+        ========================== -->
+
+        <div class="project-cards">
+
+            <!-- PROJET EXEMPLE -->
+
+            <article class="project-card">
+
+                <div class="project-card-content">
+
+                    <p class="project-category">
+                        MOBILITÉ
+                    </p>
+
+                    <h3>
+                        Parking intelligent
+                    </h3>
+
+                    <p>
+                        Un système permettant aux automobilistes
+                        de connaître les places de stationnement
+                        disponibles en temps réel.
+                    </p>
+
+                </div>
+
+            </article>
+
+
+            <!-- PROJET EXEMPLE -->
+
+            <article class="project-card">
+
+                <div class="project-card-content">
+
+                    <p class="project-category">
+                        ENVIRONNEMENT
+                    </p>
+
+                    <h3>
+                        Gestion intelligente des déchets
+                    </h3>
+
+                    <p>
+                        Des poubelles connectées permettant
+                        d'optimiser les tournées de collecte
+                        et de réduire les déplacements inutiles.
+                    </p>
+
+                </div>
+
+            </article>
+
+        </div>
+
+
+        <!-- PROJETS SUPABASE -->
+
+        <div
+            class="project-cards"
+            id="projets-dynamiques"
+        ></div>
 
     </section>
 
 
     <!-- =========================
-         MODALE AJOUT PROJET
+         FORMULAIRE
     ========================== -->
 
     <div
@@ -227,8 +232,8 @@
 
             <button
                 class="modal-close"
-                onclick="fermerFormulaire()"
                 type="button"
+                onclick="fermerFormulaire()"
             >
                 ×
             </button>
@@ -352,7 +357,7 @@
     <script>
 
         /* =========================
-           OUVRIR / FERMER LA MODALE
+           MODALE
         ========================== */
 
         function ouvrirFormulaire() {
@@ -373,36 +378,28 @@
         }
 
 
-        /* Fermer en cliquant à côté de la fenêtre */
-
         document
             .getElementById("projectModal")
             .addEventListener("click", function(event) {
 
                 if (event.target === this) {
-
                     fermerFormulaire();
-
                 }
 
             });
 
 
-        /* Fermer avec Échap */
-
         document.addEventListener("keydown", function(event) {
 
             if (event.key === "Escape") {
-
                 fermerFormulaire();
-
             }
 
         });
 
 
         /* =========================
-           AJOUT D'UN PROJET
+           AJOUT PROJET
         ========================== */
 
         document
@@ -411,23 +408,33 @@
 
                 event.preventDefault();
 
+
                 const nom =
-                    document.getElementById("nom").value.trim();
+                    document.getElementById("nom")
+                    .value
+                    .trim();
+
 
                 const categorie =
-                    document.getElementById("categorie").value;
+                    document.getElementById("categorie")
+                    .value;
+
 
                 const description =
-                    document.getElementById("description").value.trim();
+                    document.getElementById("description")
+                    .value
+                    .trim();
+
 
                 const photo =
-                    document.getElementById("photo").files[0];
+                    document.getElementById("photo")
+                    .files[0];
+
 
                 const documentProjet =
-                    document.getElementById("document").files[0];
+                    document.getElementById("document")
+                    .files[0];
 
-
-                /* Vérification */
 
                 if (!nom || !categorie || !description) {
 
@@ -436,18 +443,16 @@
                     );
 
                     return;
-
                 }
 
 
                 try {
 
-                    /* =========================
-                       PHOTO
-                    ========================== */
-
                     let photoUrl = "";
+                    let documentUrl = "";
 
+
+                    /* PHOTO */
 
                     if (photo) {
 
@@ -462,7 +467,7 @@
                             );
 
 
-                        const { error: photoError } =
+                        const { error } =
                             await supabaseClient
                                 .storage
                                 .from("projets")
@@ -472,14 +477,12 @@
                                 );
 
 
-                        if (photoError) {
-
-                            throw photoError;
-
+                        if (error) {
+                            throw error;
                         }
 
 
-                        const { data: photoData } =
+                        const { data } =
                             supabaseClient
                                 .storage
                                 .from("projets")
@@ -489,327 +492,5 @@
 
 
                         photoUrl =
-                            photoData.publicUrl;
-
-                    }
-
-
-                    /* =========================
-                       DOCUMENT
-                    ========================== */
-
-                    let documentUrl = "";
-
-
-                    if (documentProjet) {
-
-                        const nomDocument =
-                            Date.now() +
-                            "_" +
-                            crypto.randomUUID() +
-                            "_" +
-                            documentProjet.name.replace(
-                                /[^a-zA-Z0-9._-]/g,
-                                "_"
-                            );
-
-
-                        const { error: documentError } =
-                            await supabaseClient
-                                .storage
-                                .from("projets")
-                                .upload(
-                                    nomDocument,
-                                    documentProjet
-                                );
-
-
-                        if (documentError) {
-
-                            throw documentError;
-
-                        }
-
-
-                        const { data: documentData } =
-                            supabaseClient
-                                .storage
-                                .from("projets")
-                                .getPublicUrl(
-                                    nomDocument
-                                );
-
-
-                        documentUrl =
-                            documentData.publicUrl;
-
-                    }
-
-
-                    /* =========================
-                       ENREGISTREMENT EN BASE
-                    ========================== */
-
-                    const { error } =
-                        await supabaseClient
-                            .from("projets")
-                            .insert({
-
-                                nom: nom,
-
-                                categorie: categorie,
-
-                                description: description,
-
-                                photo_url: photoUrl,
-
-                                document_url: documentUrl
-
-                            });
-
-
-                    if (error) {
-
-                        throw error;
-
-                    }
-
-
-                    alert(
-                        "Projet ajouté avec succès !"
-                    );
-
-
-                    /* Réinitialisation */
-
-                    this.reset();
-
-                    fermerFormulaire();
-
-
-                    /*
-                     * Recharge la page pour afficher
-                     * immédiatement le nouveau projet.
-                     */
-
-                    window.location.reload();
-
-                }
-
-
-                catch (error) {
-
-                    console.error(
-                        "Erreur complète :",
-                        error
-                    );
-
-                    alert(
-                        "Erreur lors de l'ajout du projet : " +
-                        error.message
-                    );
-
-                }
-
-            });
-
-
-        /* =========================
-           CHARGER LES PROJETS
-        ========================== */
-
-        async function chargerProjets() {
-
-            const conteneur =
-                document.getElementById(
-                    "projets-dynamiques"
-                );
-
-
-            if (!conteneur) {
-
-                return;
-
-            }
-
-
-            const { data: projets, error } =
-                await supabaseClient
-                    .from("projets")
-                    .select("*")
-                    .order("id", {
-                        ascending: false
-                    });
-
-
-            if (error) {
-
-                console.error(
-                    "Erreur chargement projets :",
-                    error
-                );
-
-                return;
-
-            }
-
-
-            /* Nettoyage */
-
-            conteneur.innerHTML = "";
-
-
-            if (!projets || projets.length === 0) {
-
-                return;
-
-            }
-
-
-            /* Création des cartes */
-
-            projets.forEach(function(projet) {
-
-                const nouveauProjet =
-                    document.createElement("article");
-
-
-                nouveauProjet.className =
-                    "project-card";
-
-
-                nouveauProjet.innerHTML = `
-
-                    ${
-                        projet.photo_url
-                            ? `
-                                <img
-                                    src="${projet.photo_url}"
-                                    alt="${projet.nom}"
-                                >
-                              `
-                            : ""
-                    }
-
-
-                    <div class="project-card-content">
-
-                        <p class="project-category">
-                            ${projet.categorie}
-                        </p>
-
-                        <h3>
-                            ${projet.nom}
-                        </h3>
-
-                        <p>
-                            ${projet.description}
-                        </p>
-
-
-                        ${
-                            projet.document_url
-                                ? `
-                                    <a
-                                        href="${projet.document_url}"
-                                        target="_blank"
-                                        class="button"
-                                    >
-                                        📄 Voir le document
-                                    </a>
-                                  `
-                                : ""
-                        }
-
-
-                        <button
-                            class="delete-project"
-                            onclick="supprimerProjet(
-                                ${projet.id},
-                                this
-                            )"
-                        >
-                            🗑️ Supprimer
-                        </button>
-
-                    </div>
-
-                `;
-
-
-                conteneur.appendChild(
-                    nouveauProjet
-                );
-
-            });
-
-        }
-
-
-        /* =========================
-           SUPPRIMER UN PROJET
-        ========================== */
-
-        async function supprimerProjet(
-            id,
-            bouton
-        ) {
-
-            const confirmation =
-                confirm(
-                    "Voulez-vous vraiment supprimer ce projet ?"
-                );
-
-
-            if (!confirmation) {
-
-                return;
-
-            }
-
-
-            const { error } =
-                await supabaseClient
-                    .from("projets")
-                    .delete()
-                    .eq("id", id);
-
-
-            if (error) {
-
-                console.error(
-                    "Erreur suppression :",
-                    error
-                );
-
-                alert(
-                    "La suppression n'est pas autorisée actuellement."
-                );
-
-                return;
-
-            }
-
-
-            bouton
-                .closest(".project-card")
-                .remove();
-
-
-            alert(
-                "Projet supprimé."
-            );
-
-        }
-
-
-        /* =========================
-           CHARGEMENT INITIAL
-        ========================== */
-
-        chargerProjets();
-
-    </script>
-
-</body>
-</html>
+                            data.publicU
+```
