@@ -587,18 +587,30 @@ const documentProjet = this.querySelector('input[type="file"][accept=".pdf,.ppt,
     const nouveauProjet = document.createElement("article");
     nouveauProjet.className = "project-card";
 
-   nouveauProjet.innerHTML = `
+  nouveauProjet.innerHTML = `
+    ${photo ? `<img src="${URL.createObjectURL(photo)}" alt="${nom}">` : ""}
+
     <div class="project-card-content">
         <p class="project-category">${categorie}</p>
+
         <h3>${nom}</h3>
+
         <p>${description}</p>
 
-        <button class="delete-project" onclick="this.closest('.project-card').remove()">
-            Supprimer
+        ${documentProjet ? `
+            <a href="${URL.createObjectURL(documentProjet)}"
+               target="_blank"
+               class="button">
+                📄 Voir le document
+            </a>
+        ` : ""}
+
+        <button class="delete-project"
+                onclick="this.closest('.project-card').remove()">
+            🗑️ Supprimer
         </button>
     </div>
 `;
-
     projets.appendChild(nouveauProjet);
 
     this.reset();
