@@ -567,7 +567,41 @@ document.addEventListener("keydown", function(event) {
 });
 
 </script>
+<script>
+document.querySelector(".modal-content form").addEventListener("submit", function(event) {
+    event.preventDefault();
 
+    const nom = this.querySelector('input[type="text"]').value;
+    const categorie = this.querySelector("select").value;
+    const description = this.querySelector("textarea").value;
+
+    if (!nom || categorie === "Choisir une catégorie" || !description) {
+        alert("Merci de remplir les champs obligatoires.");
+        return;
+    }
+
+    const projets = document.querySelector(".project-cards");
+
+    const nouveauProjet = document.createElement("article");
+    nouveauProjet.className = "project-card";
+
+    nouveauProjet.innerHTML = `
+        <div class="project-card-content">
+            <p class="project-category">${categorie}</p>
+            <h3>${nom}</h3>
+            <p>${description}</p>
+        </div>
+    `;
+
+    projets.appendChild(nouveauProjet);
+
+    this.reset();
+    fermerFormulaire();
+
+    alert("Projet ajouté avec succès !");
+});
+</script>
+    
 </body>
 
 </html>
