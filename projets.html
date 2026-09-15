@@ -572,6 +572,8 @@ document.querySelector(".modal-content form").addEventListener("submit", functio
     event.preventDefault();
 
     const nom = this.querySelector('input[type="text"]').value;
+    const photo = this.querySelector('input[type="file"][accept="image/*"]').files[0];
+const documentProjet = this.querySelector('input[type="file"][accept=".pdf,.ppt,.pptx,.doc,.docx"]').files[0];
     const categorie = this.querySelector("select").value;
     const description = this.querySelector("textarea").value;
 
