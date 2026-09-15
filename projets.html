@@ -619,7 +619,19 @@ const documentProjet = this.querySelector('input[type="file"][accept=".pdf,.ppt,
     alert("Projet ajouté avec succès !");
 });
 </script>
-    
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<script>
+const SUPABASE_URL = "https://uxwbkrkmpqxkzqsxhfih.supabase.co";
+const SUPABASE_KEY = "sb_publishable_zQ6z5dvxgDrhdXzAwnxKDg_waO7fLyy";
+
+const supabaseClient = supabase.createClient(
+    SUPABASE_URL,
+    SUPABASE_KEY
+);
+
+console.log("Supabase connecté !");
+</script>
 </body>
 
 </html>
