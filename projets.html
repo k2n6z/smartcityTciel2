@@ -342,14 +342,13 @@
 
                 </div>
 
-                <a href="#ajouter" class="add-project">
+              <button class="add-project" onclick="ouvrirFormulaire()">
 
-                    <span class="plus">+</span>
+    <span class="plus">+</span>
 
-                    Ajouter un projet
+    Ajouter un projet
 
-                </a>
-
+</button>
             </div>
 
 
@@ -497,7 +496,77 @@
         </p>
 
     </footer>
+<div class="modal" id="projectModal">
 
+    <div class="modal-content">
+
+        <button class="modal-close" onclick="fermerFormulaire()">×</button>
+
+        <p class="small-title">NOUVEAU PROJET</p>
+
+        <h2>Ajouter un projet</h2>
+
+        <p class="modal-description">
+            Présentez votre projet en renseignant les informations ci-dessous.
+        </p>
+
+        <form>
+
+            <label>Nom du projet</label>
+            <input type="text" placeholder="Ex : Parking intelligent">
+
+            <label>Catégorie</label>
+            <select>
+                <option>Choisir une catégorie</option>
+                <option>Mobilité</option>
+                <option>Environnement</option>
+                <option>Énergie</option>
+                <option>Technologie</option>
+                <option>Autre</option>
+            </select>
+
+            <label>Description</label>
+            <textarea rows="5" placeholder="Présentez votre projet..."></textarea>
+
+            <label>Image du projet</label>
+            <input type="file" accept="image/*">
+
+            <label>Document</label>
+            <input type="file" accept=".pdf,.ppt,.pptx,.doc,.docx">
+
+            <button type="submit" class="button modal-submit">
+                Ajouter le projet
+            </button>
+
+        </form>
+
+    </div>
+
+</div>
+
+<script>
+
+function ouvrirFormulaire() {
+    document.getElementById("projectModal").classList.add("active");
+}
+
+function fermerFormulaire() {
+    document.getElementById("projectModal").classList.remove("active");
+}
+
+document.getElementById("projectModal").addEventListener("click", function(event) {
+    if (event.target === this) {
+        fermerFormulaire();
+    }
+});
+
+document.addEventListener("keydown", function(event) {
+    if (event.key === "Escape") {
+        fermerFormulaire();
+    }
+});
+
+</script>
 
 </body>
 
