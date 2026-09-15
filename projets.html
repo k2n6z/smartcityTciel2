@@ -1,0 +1,504 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Projets | SmartCity</title>
+
+    <meta name="description" content="Découvrez les projets réalisés dans le cadre de SmartCity.">
+
+    <link rel="stylesheet" href="style.css">
+
+    <style>
+
+        /* PAGE PROJETS */
+
+        .projects-hero {
+            min-height: 65vh;
+            display: flex;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+
+            background:
+                linear-gradient(
+                    rgba(7, 17, 31, 0.65),
+                    rgba(7, 17, 31, 0.9)
+                ),
+                url("9tsp7cklthr71.jpg");
+
+            background-size: cover;
+            background-position: center;
+        }
+
+        .projects-hero-content {
+            max-width: 1200px;
+            width: 100%;
+            margin: auto;
+            padding: 130px 30px 80px;
+        }
+
+        .projects-hero h1 {
+            font-size: clamp(50px, 8vw, 95px);
+            line-height: 0.95;
+            margin-bottom: 30px;
+            letter-spacing: -4px;
+        }
+
+        .projects-hero h1 span {
+            color: #36d399;
+        }
+
+        .projects-hero p:not(.small-title) {
+            max-width: 650px;
+            color: #b7c2d0;
+            font-size: 19px;
+        }
+
+
+        /* BARRE DES PROJETS */
+
+        .projects-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 30px;
+            margin-bottom: 50px;
+        }
+
+        .add-project {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 15px 24px;
+
+            background: #36d399;
+            color: #07111f;
+
+            text-decoration: none;
+            font-weight: bold;
+
+            border-radius: 8px;
+
+            transition: 0.3s;
+        }
+
+        .add-project:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(54,211,153,0.25);
+        }
+
+        .plus {
+            font-size: 24px;
+            line-height: 1;
+        }
+
+
+        /* CARTES */
+
+        .project-cards {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 25px;
+        }
+
+        .project-card {
+            background: #0d1b2d;
+            border: 1px solid rgba(255,255,255,0.07);
+            border-radius: 14px;
+            overflow: hidden;
+            transition: 0.3s;
+        }
+
+        .project-card:hover {
+            transform: translateY(-8px);
+            border-color: rgba(54,211,153,0.5);
+        }
+
+        .project-card-image {
+            height: 190px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #10263c,
+                    #07111f
+                );
+
+            font-size: 65px;
+        }
+
+        .project-card-content {
+            padding: 25px;
+        }
+
+        .project-card-content h3 {
+            font-size: 23px;
+            margin-bottom: 10px;
+        }
+
+        .project-card-content p {
+            color: #9eacbd;
+            font-size: 15px;
+            margin-bottom: 20px;
+        }
+
+        .project-tag {
+            display: inline-block;
+            padding: 6px 10px;
+
+            color: #36d399;
+            background: rgba(54,211,153,0.1);
+
+            border-radius: 5px;
+            font-size: 12px;
+            font-weight: bold;
+            margin-bottom: 18px;
+        }
+
+        .project-link {
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .project-link:hover {
+            color: #36d399;
+        }
+
+
+        /* MODE PRESENTATION */
+
+        .presentation {
+            margin-top: 80px;
+            padding: 60px 40px;
+
+            text-align: center;
+
+            background:
+                radial-gradient(
+                    circle at center,
+                    rgba(54,211,153,0.12),
+                    transparent 60%
+                );
+
+            border: 1px solid rgba(255,255,255,0.08);
+            border-radius: 15px;
+        }
+
+        .presentation h2 {
+            font-size: clamp(35px, 5vw, 55px);
+            margin-bottom: 15px;
+        }
+
+        .presentation p {
+            max-width: 650px;
+            margin: 0 auto 30px;
+            color: #9eacbd;
+        }
+
+
+        /* RESPONSIVE */
+
+        @media (max-width: 900px) {
+
+            .project-cards {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .projects-header {
+                align-items: flex-start;
+                flex-direction: column;
+            }
+        }
+
+        @media (max-width: 600px) {
+
+            .project-cards {
+                grid-template-columns: 1fr;
+            }
+
+            .projects-hero-content {
+                padding-left: 20px;
+                padding-right: 20px;
+            }
+
+            .presentation {
+                padding: 40px 20px;
+            }
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+    <!-- NAVIGATION -->
+
+    <header>
+
+        <nav class="navbar">
+
+            <a href="index.html" class="logo">
+                SMART<span>CITY</span>
+            </a>
+
+            <ul class="nav-links">
+
+                <li>
+                    <a href="index.html">
+                        Accueil
+                    </a>
+                </li>
+
+                <li>
+                    <a href="index.html#projet">
+                        Notre projet
+                    </a>
+                </li>
+
+                <li>
+                    <a href="a-propos.html">
+                        À propos
+                    </a>
+                </li>
+
+                <li>
+                    <a href="projets.html">
+                        Projets
+                    </a>
+                </li>
+
+                <li>
+                    <a href="index.html#solutions">
+                        Solutions
+                    </a>
+                </li>
+
+                <li>
+                    <a href="index.html#contact">
+                        Contact
+                    </a>
+                </li>
+
+            </ul>
+
+        </nav>
+
+    </header>
+
+
+    <main>
+
+
+        <!-- HERO -->
+
+        <section class="projects-hero">
+
+            <div class="projects-hero-content">
+
+                <p class="small-title">
+                    NOS RÉALISATIONS
+                </p>
+
+                <h1>
+                    Nos<br>
+                    <span>projets.</span>
+                </h1>
+
+                <p>
+                    Retrouvez ici les différents projets, documents
+                    et réalisations présentés autour de SmartCity.
+                </p>
+
+            </div>
+
+        </section>
+
+
+        <!-- PROJETS -->
+
+        <section class="section">
+
+            <div class="projects-header">
+
+                <div class="section-title">
+
+                    <p>
+                        ESPACE PROJETS
+                    </p>
+
+                    <h2>
+                        Nos réalisations
+                    </h2>
+
+                </div>
+
+                <a href="#ajouter" class="add-project">
+
+                    <span class="plus">+</span>
+
+                    Ajouter un projet
+
+                </a>
+
+            </div>
+
+
+            <div class="project-cards">
+
+
+                <!-- PROJET 1 -->
+
+                <article class="project-card">
+
+                    <div class="project-card-image">
+                        🚦
+                    </div>
+
+                    <div class="project-card-content">
+
+                        <span class="project-tag">
+                            MOBILITÉ
+                        </span>
+
+                        <h3>
+                            Feux intelligents
+                        </h3>
+
+                        <p>
+                            Un système permettant d'adapter les feux
+                            de circulation en fonction du trafic.
+                        </p>
+
+                        <a href="#" class="project-link">
+                            Voir le projet →
+                        </a>
+
+                    </div>
+
+                </article>
+
+
+                <!-- PROJET 2 -->
+
+                <article class="project-card">
+
+                    <div class="project-card-image">
+                        🌱
+                    </div>
+
+                    <div class="project-card-content">
+
+                        <span class="project-tag">
+                            ENVIRONNEMENT
+                        </span>
+
+                        <h3>
+                            Ville écologique
+                        </h3>
+
+                        <p>
+                            Des solutions connectées pour réduire
+                            l'impact environnemental des villes.
+                        </p>
+
+                        <a href="#" class="project-link">
+                            Voir le projet →
+                        </a>
+
+                    </div>
+
+                </article>
+
+
+                <!-- PROJET 3 -->
+
+                <article class="project-card">
+
+                    <div class="project-card-image">
+                        ⚡
+                    </div>
+
+                    <div class="project-card-content">
+
+                        <span class="project-tag">
+                            ÉNERGIE
+                        </span>
+
+                        <h3>
+                            Énergie intelligente
+                        </h3>
+
+                        <p>
+                            Une gestion intelligente de l'énergie
+                            dans les bâtiments et les infrastructures.
+                        </p>
+
+                        <a href="#" class="project-link">
+                            Voir le projet →
+                        </a>
+
+                    </div>
+
+                </article>
+
+
+            </div>
+
+
+            <!-- MODE PRÉSENTATION -->
+
+            <div class="presentation" id="ajouter">
+
+                <h2>
+                    Présenter un projet
+                </h2>
+
+                <p>
+                    Préparez vos projets et présentez-les facilement
+                    sur un grand écran lors de votre présentation.
+                </p>
+
+                <a href="#" class="button">
+                    🎬 Mode présentation
+                </a>
+
+            </div>
+
+        </section>
+
+
+    </main>
+
+
+    <!-- FOOTER -->
+
+    <footer>
+
+        <div class="logo">
+            SMART<span>CITY</span>
+        </div>
+
+        <p>
+            Projet réalisé dans le cadre du Bac Pro
+        </p>
+
+        <p>
+            © 2026 SmartCity — Tous droits réservés
+        </p>
+
+    </footer>
+
+
+</body>
+
+</html>
