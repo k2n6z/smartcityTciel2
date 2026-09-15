@@ -1,11 +1,9 @@
-```html
 <!DOCTYPE html>
 <html lang="fr">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
     <title>Projets - SmartCity</title>
 
     <link rel="stylesheet" href="style.css">
@@ -22,20 +20,18 @@
     <script>
         const SUPABASE_URL = "https://uxwbkrkmpqxkzqsxhfih.supabase.co";
 
-        /* Garde ici ta vraie clé Publishable */
+        // ⚠️ GARDE TA VRAIE CLÉ PUBLISHABLE ICI
         const SUPABASE_KEY = "TA_VRAIE_CLE_PUBLISHABLE";
 
         const supabaseClient = supabase.createClient(
             SUPABASE_URL,
             SUPABASE_KEY
         );
-
-        console.log("Supabase connecté !");
     </script>
 
 
     <!-- =========================
-         NAVIGATION
+         HEADER
     ========================== -->
 
     <header>
@@ -88,7 +84,7 @@
 
 
     <!-- =========================
-         HERO PROJETS
+         HERO
     ========================== -->
 
     <section class="hero">
@@ -115,10 +111,10 @@
 
 
     <!-- =========================
-         SECTION PROJETS
+         PROJETS
     ========================== -->
 
-    <section class="section" id="projets">
+    <section class="section">
 
         <div class="section-header">
 
@@ -139,10 +135,12 @@
 
             </div>
 
+            <!-- BOUTON -->
+
             <button
+                id="ouvrirProjet"
                 class="add-project"
                 type="button"
-                onclick="ouvrirFormulaire()"
             >
                 <span class="plus">+</span>
                 Ajouter un projet
@@ -151,13 +149,14 @@
         </div>
 
 
-        <!-- =========================
-             PROJETS
-        ========================== -->
+        <!-- PROJETS -->
 
-        <div class="project-cards">
+        <div
+            class="project-cards"
+            id="listeProjets"
+        >
 
-            <!-- PROJET EXEMPLE -->
+            <!-- Projet 1 -->
 
             <article class="project-card">
 
@@ -182,7 +181,7 @@
             </article>
 
 
-            <!-- PROJET EXEMPLE -->
+            <!-- Projet 2 -->
 
             <article class="project-card">
 
@@ -208,35 +207,29 @@
 
         </div>
 
-
-        <!-- PROJETS SUPABASE -->
-
-        <div
-            class="project-cards"
-            id="projets-dynamiques"
-        ></div>
-
     </section>
 
 
     <!-- =========================
-         FORMULAIRE
+         MODALE
     ========================== -->
 
     <div
-        class="modal"
         id="projectModal"
+        class="modal"
     >
 
         <div class="modal-content">
 
             <button
+                id="fermerProjet"
                 class="modal-close"
                 type="button"
-                onclick="fermerFormulaire()"
+                aria-label="Fermer"
             >
                 ×
             </button>
+
 
             <p class="small-title">
                 NOUVEAU PROJET
@@ -251,6 +244,8 @@
                 les informations ci-dessous.
             </p>
 
+
+            <!-- FORMULAIRE -->
 
             <form id="projectForm">
 
@@ -357,92 +352,145 @@
     <script>
 
         /* =========================
-           MODALE
+           ÉLÉMENTS
         ========================== */
 
-        function ouvrirFormulaire() {
+        const modal =
+            document.getElementById("projectModal");
 
-            document
-                .getElementById("projectModal")
-                .classList.add("active");
+        const boutonOuvrir =
+            document.getElementById("ouvrirProjet");
 
-        }
+        const boutonFermer =
+            document.getElementById("fermerProjet");
 
-
-        function fermerFormulaire() {
-
-            document
-                .getElementById("projectModal")
-                .classList.remove("active");
-
-        }
-
-
-        document
-            .getElementById("projectModal")
-            .addEventListener("click", function(event) {
-
-                if (event.target === this) {
-                    fermerFormulaire();
-                }
-
-            });
-
-
-        document.addEventListener("keydown", function(event) {
-
-            if (event.key === "Escape") {
-                fermerFormulaire();
-            }
-
-        });
+        const formulaire =
+            document.getElementById("projectForm");
 
 
         /* =========================
-           AJOUT PROJET
+           OUVRIR
         ========================== */
 
-        document
-            .getElementById("projectForm")
-            .addEventListener("submit", async function(event) {
+        boutonOuvrir.addEventListener(
+            "click",
+            function () {
+
+                modal.classList.add("active");
+
+                document.body.style.overflow = "hidden";
+
+            }
+        );
+
+
+        /* =========================
+           FERMER
+        ========================== */
+
+        boutonFermer.addEventListener(
+            "click",
+            function () {
+
+                modal.classList.remove("active");
+
+                document.body.style.overflow = "";
+
+            }
+        );
+
+
+        /* Clic en dehors de la fenêtre */
+
+        modal.addEventListener(
+            "click",
+            function (event) {
+
+                if (event.target === modal) {
+
+                    modal.classList.remove("active");
+
+                    document.body.style.overflow = "";
+
+                }
+
+            }
+        );
+
+
+        /* Touche Échap */
+
+        document.addEventListener(
+            "keydown",
+            function (event) {
+
+                if (event.key === "Escape") {
+
+                    modal.classList.remove("active");
+
+                    document.body.style.overflow = "";
+
+                }
+
+            }
+        );
+
+
+        /* =========================
+           AJOUT DU PROJET
+        ========================== */
+
+        formulaire.addEventListener(
+            "submit",
+            async function (event) {
 
                 event.preventDefault();
 
 
                 const nom =
-                    document.getElementById("nom")
-                    .value
-                    .trim();
+                    document
+                        .getElementById("nom")
+                        .value
+                        .trim();
 
 
                 const categorie =
-                    document.getElementById("categorie")
-                    .value;
+                    document
+                        .getElementById("categorie")
+                        .value;
 
 
                 const description =
-                    document.getElementById("description")
-                    .value
-                    .trim();
+                    document
+                        .getElementById("description")
+                        .value
+                        .trim();
 
 
                 const photo =
-                    document.getElementById("photo")
-                    .files[0];
+                    document
+                        .getElementById("photo")
+                        .files[0];
 
 
                 const documentProjet =
-                    document.getElementById("document")
-                    .files[0];
+                    document
+                        .getElementById("document")
+                        .files[0];
 
 
-                if (!nom || !categorie || !description) {
+                if (
+                    !nom ||
+                    !categorie ||
+                    !description
+                ) {
 
                     alert(
                         "Merci de remplir tous les champs obligatoires."
                     );
 
                     return;
+
                 }
 
 
@@ -452,7 +500,9 @@
                     let documentUrl = "";
 
 
-                    /* PHOTO */
+                    /* =====================
+                       PHOTO
+                    ====================== */
 
                     if (photo) {
 
@@ -467,7 +517,7 @@
                             );
 
 
-                        const { error } =
+                        const resultatPhoto =
                             await supabaseClient
                                 .storage
                                 .from("projets")
@@ -477,12 +527,12 @@
                                 );
 
 
-                        if (error) {
-                            throw error;
+                        if (resultatPhoto.error) {
+                            throw resultatPhoto.error;
                         }
 
 
-                        const { data } =
+                        const publicPhoto =
                             supabaseClient
                                 .storage
                                 .from("projets")
@@ -492,5 +542,261 @@
 
 
                         photoUrl =
-                            data.publicU
-```
+                            publicPhoto.data.publicUrl;
+
+                    }
+
+
+                    /* =====================
+                       DOCUMENT
+                    ====================== */
+
+                    if (documentProjet) {
+
+                        const nomDocument =
+                            Date.now() +
+                            "_" +
+                            crypto.randomUUID() +
+                            "_" +
+                            documentProjet.name.replace(
+                                /[^a-zA-Z0-9._-]/g,
+                                "_"
+                            );
+
+
+                        const resultatDocument =
+                            await supabaseClient
+                                .storage
+                                .from("projets")
+                                .upload(
+                                    nomDocument,
+                                    documentProjet
+                                );
+
+
+                        if (resultatDocument.error) {
+                            throw resultatDocument.error;
+                        }
+
+
+                        const publicDocument =
+                            supabaseClient
+                                .storage
+                                .from("projets")
+                                .getPublicUrl(
+                                    nomDocument
+                                );
+
+
+                        documentUrl =
+                            publicDocument.data.publicUrl;
+
+                    }
+
+
+                    /* =====================
+                       BASE DE DONNÉES
+                    ====================== */
+
+                    const resultat =
+                        await supabaseClient
+                            .from("projets")
+                            .insert({
+
+                                nom: nom,
+
+                                categorie: categorie,
+
+                                description: description,
+
+                                photo_url: photoUrl,
+
+                                document_url: documentUrl
+
+                            });
+
+
+                    if (resultat.error) {
+                        throw resultat.error;
+                    }
+
+
+                    alert(
+                        "Projet ajouté avec succès !"
+                    );
+
+
+                    formulaire.reset();
+
+
+                    modal.classList.remove("active");
+
+                    document.body.style.overflow = "";
+
+
+                    chargerProjets();
+
+                }
+
+                catch (error) {
+
+                    console.error(
+                        "Erreur :",
+                        error
+                    );
+
+
+                    alert(
+                        "Erreur lors de l'ajout : " +
+                        error.message
+                    );
+
+                }
+
+            }
+        );
+
+
+        /* =========================
+           CHARGER LES PROJETS
+        ========================== */
+
+        async function chargerProjets() {
+
+            const liste =
+                document.getElementById(
+                    "listeProjets"
+                );
+
+
+            const resultat =
+                await supabaseClient
+                    .from("projets")
+                    .select("*")
+                    .order(
+                        "id",
+                        {
+                            ascending: false
+                        }
+                    );
+
+
+            if (resultat.error) {
+
+                console.error(
+                    "Erreur chargement :",
+                    resultat.error
+                );
+
+                return;
+
+            }
+
+
+            /*
+             * On garde les deux projets
+             * de démonstration.
+             *
+             * On supprime seulement les
+             * anciennes cartes dynamiques.
+             */
+
+            document
+                .querySelectorAll(
+                    ".project-card[data-dynamic='true']"
+                )
+                .forEach(
+                    carte => carte.remove()
+                );
+
+
+            if (
+                !resultat.data ||
+                resultat.data.length === 0
+            ) {
+                return;
+            }
+
+
+            resultat.data.forEach(
+                function (projet) {
+
+                    const carte =
+                        document.createElement(
+                            "article"
+                        );
+
+
+                    carte.className =
+                        "project-card";
+
+
+                    carte.dataset.dynamic =
+                        "true";
+
+
+                    carte.innerHTML = `
+
+                        ${
+                            projet.photo_url
+                                ? `
+                                    <img
+                                        src="${projet.photo_url}"
+                                        alt="${projet.nom}"
+                                    >
+                                `
+                                : ""
+                        }
+
+                        <div class="project-card-content">
+
+                            <p class="project-category">
+                                ${projet.categorie}
+                            </p>
+
+                            <h3>
+                                ${projet.nom}
+                            </h3>
+
+                            <p>
+                                ${projet.description}
+                            </p>
+
+                            ${
+                                projet.document_url
+                                    ? `
+                                        <a
+                                            href="${projet.document_url}"
+                                            target="_blank"
+                                            class="button"
+                                        >
+                                            Voir le document
+                                        </a>
+                                    `
+                                    : ""
+                            }
+
+                        </div>
+
+                    `;
+
+
+                    liste.appendChild(carte);
+
+                }
+            );
+
+        }
+
+
+        /* =========================
+           LANCEMENT
+        ========================== */
+
+        chargerProjets();
+
+    </script>
+
+</body>
+
+</html>
