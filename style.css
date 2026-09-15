@@ -76,10 +76,10 @@ header {
 
     background-image:
         linear-gradient(
-            rgba(7, 17, 31, 0.55),
-            rgba(7, 17, 31, 0.75)
+            rgba(7, 17, 31, 0.45),
+            rgba(7, 17, 31, 0.65)
         ),
-        url("smartcity.jpg");
+        url("9tsp7cklthr71.jpg");
 
     background-size: cover;
     background-position: center;
