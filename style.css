@@ -73,22 +73,19 @@ header {
     align-items: center;
     position: relative;
     overflow: hidden;
-    background:
-        radial-gradient(circle at 80% 30%, rgba(54,211,153,0.18), transparent 30%),
-        radial-gradient(circle at 20% 80%, rgba(59,130,246,0.15), transparent 30%),
-        #07111f;
+
+    background-image:
+        linear-gradient(
+            rgba(7, 17, 31, 0.55),
+            rgba(7, 17, 31, 0.75)
+        ),
+        url("smartcity.jpg");
+
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
 }
 
-.hero::before {
-    content: "";
-    position: absolute;
-    width: 500px;
-    height: 500px;
-    border: 1px solid rgba(54,211,153,0.15);
-    border-radius: 50%;
-    right: -150px;
-    top: 100px;
-}
 
 .hero-content {
     max-width: 1200px;
