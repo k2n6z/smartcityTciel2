@@ -20,3 +20,41 @@ cards.forEach((card) => {
 
     observer.observe(card);
 });
+
+/* =========================
+   MENU MOBILE
+========================= */
+
+const menuToggle = document.getElementById("menuToggle");
+const navLinks = document.getElementById("navLinks");
+
+if (menuToggle && navLinks) {
+
+    menuToggle.addEventListener("click", function () {
+
+        const ouvert = navLinks.classList.toggle("active");
+
+        menuToggle.setAttribute(
+            "aria-expanded",
+            ouvert
+        );
+
+        menuToggle.setAttribute(
+            "aria-label",
+            ouvert ? "Fermer le menu" : "Ouvrir le menu"
+        );
+
+        menuToggle.textContent = ouvert ? "✕" : "☰";
+    });
+
+    navLinks.querySelectorAll("a").forEach(function (lien) {
+
+        lien.addEventListener("click", function () {
+            navLinks.classList.remove("active");
+            menuToggle.textContent = "☰";
+            menuToggle.setAttribute("aria-expanded", "false");
+            menuToggle.setAttribute("aria-label", "Ouvrir le menu");
+        });
+
+    });
+}
