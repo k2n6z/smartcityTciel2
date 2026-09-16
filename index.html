@@ -13,21 +13,34 @@
 
 <body>
 
-    <header>
-        <nav class="navbar">
-            <div class="logo">SMART<span>CITY</span></div>
+    
+<header>
+    <nav class="navbar">
+        <a href="index.html" class="logo">
+            SMART<span>CITY</span>
+        </a>
 
-        <ul class="nav-links">
-    <li><a href="index.html">Accueil</a></li>
-    <li><a href="#projet">Notre projet</a></li>
-    <li><a href="a-propos.html">À propos</a></li>
-    <li><a href="projets.html">Projets</a></li>
-    <li><a href="#solutions">Solutions</a></li>
-    <li><a href="#contact">Contact</a></li>
-</ul>
-        </nav>
-    </header>
+        <button
+            class="menu-toggle"
+            id="menuToggle"
+            aria-label="Ouvrir le menu"
+            aria-expanded="false"
+            aria-controls="navLinks"
+            type="button"
+        >
+            ☰
+        </button>
 
+        <ul class="nav-links" id="navLinks">
+            <li><a href="index.html">Accueil</a></li>
+            <li><a href="#projet">Notre projet</a></li>
+            <li><a href="a-propos.html">À propos</a></li>
+            <li><a href="projets.html">Projets</a></li>
+            <li><a href="#solutions">Solutions</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+    </nav>
+</header>
     <main>
 
         <section id="accueil" class="hero">
