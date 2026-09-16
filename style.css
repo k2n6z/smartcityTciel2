@@ -845,3 +845,67 @@ footer .logo {
         grid-template-columns: repeat(2, minmax(0, 1fr));
     }
 }
+
+/* =========================
+   MENU MOBILE SMARTCITY
+========================= */
+
+.menu-toggle {
+    display: none;
+    background: transparent;
+    color: white;
+    border: 1px solid rgba(255,255,255,0.2);
+    border-radius: 8px;
+    padding: 7px 12px;
+    font-size: 25px;
+    cursor: pointer;
+}
+
+/* Téléphones et tablettes */
+@media (max-width: 900px) {
+
+    header {
+        height: auto;
+        min-height: 65px;
+    }
+
+    .navbar {
+        min-height: 65px;
+        height: auto;
+        padding: 12px 20px;
+        flex-wrap: wrap;
+    }
+
+    .menu-toggle {
+        display: block;
+        margin-left: auto;
+    }
+
+    .nav-links {
+        display: none;
+        order: 3;
+        width: 100%;
+        flex-direction: column;
+        align-items: stretch;
+        gap: 0;
+        padding: 10px 0;
+    }
+
+    .nav-links.active {
+        display: flex;
+    }
+
+    .nav-links li {
+        width: 100%;
+    }
+
+    .nav-links a {
+        display: block;
+        padding: 12px 8px;
+        font-size: 16px;
+    }
+
+    .nav-links a:hover {
+        background: rgba(54,211,153,0.1);
+    }
+}
